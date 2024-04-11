@@ -9,6 +9,7 @@
 [![GitHub watchers](https://img.shields.io/github/watchers/dcarpintero/nn-image-classifier.svg?style=social&label=Watch)](https://GitHub.com/dcarpintero/nn-image-classifier/watchers/)
 [![GitHub forks](https://img.shields.io/github/forks/dcarpintero/nn-image-classifier.svg?style=social&label=Fork)](https://GitHub.com/dcarpintero/nn-image-classifier/network/)
 [![GitHub stars](https://img.shields.io/github/stars/dcarpintero/nn-image-classifier.svg?style=social&label=Star)](https://GitHub.com/dcarpintero/nn-image-classifier/stargazers/)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/dcarpintero/nn-image-classifier/blob/main/nb.image.classifier.ipynb)
 
 
 Classification is one of the fundamental deep learning tasks. While modern frameworks like PyTorch, JAX, Keras, and TensorFlow offer a convenient abstraction to build and train neural networks, crafting one from scratch provides a more comprehensive understanding of the nuances involved.
@@ -474,7 +475,7 @@ This can be easily integrated into a Gradio App, and then deployed to [HuggingFa
 
 ## Resources
 
-- [GitHub Repo](https://github.com/dcarpintero/nn-image-classifier/)
+- [Open in Google Colab](https://colab.research.google.com/github/dcarpintero/nn-image-classifier/blob/main/nb.image.classifier.ipynb)
 - [Model Card](https://huggingface.co/dcarpintero/fashion-mnist-base)
 - [HuggingFace Space](https://huggingface.co/spaces/dcarpintero/fashion-image-recognition)
 
