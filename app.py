@@ -4,7 +4,7 @@ import gradio as gr
 import torch
 import torchvision.transforms as transforms
 
-from model import *
+from nn.model import *
 
 title = "Garment Classifier"
 description = "Trained on the Fashion MNIST dataset (28x28 pixels). The model expects images containing only one garment article as in the examples."
