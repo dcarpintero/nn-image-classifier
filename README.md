@@ -1,15 +1,16 @@
 # Building a Neural Network Classifier from the Ground Up: A Step-by-Step Guide
 
-[![GitHub license](https://img.shields.io/github/license/dcarpintero/nn-image-classifier.svg)](https://github.com/dcarpintero/nn-image-classifier/blob/master/LICENSE)
+[![GitHub license](https://img.shields.io/github/license/dcarpintero/nn-image-classifier)](https://github.com/dcarpintero/nn-image-classifier/blob/main/LICENSE)
 [![GitHub contributors](https://img.shields.io/github/contributors/dcarpintero/nn-image-classifier.svg)](https://GitHub.com/dcarpintero/nn-image-classifier/graphs/contributors/)
 [![GitHub issues](https://img.shields.io/github/issues/dcarpintero/nn-image-classifier.svg)](https://GitHub.com/dcarpintero/nn-image-classifier/issues/)
 [![GitHub pull-requests](https://img.shields.io/github/issues-pr/dcarpintero/nn-image-classifier.svg)](https://GitHub.com/dcarpintero/nn-image-classifier/pulls/)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/dcarpintero/nn-image-classifier/blob/main/nb.image.classifier.ipynb)
 
 [![GitHub watchers](https://img.shields.io/github/watchers/dcarpintero/nn-image-classifier.svg?style=social&label=Watch)](https://GitHub.com/dcarpintero/nn-image-classifier/watchers/)
 [![GitHub forks](https://img.shields.io/github/forks/dcarpintero/nn-image-classifier.svg?style=social&label=Fork)](https://GitHub.com/dcarpintero/nn-image-classifier/network/)
 [![GitHub stars](https://img.shields.io/github/stars/dcarpintero/nn-image-classifier.svg?style=social&label=Star)](https://GitHub.com/dcarpintero/nn-image-classifier/stargazers/)
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/dcarpintero/nn-image-classifier/blob/main/nb.image.classifier.ipynb)
+
 
 
 Classification is one of the fundamental deep learning tasks. While modern frameworks like PyTorch, JAX, Keras, and TensorFlow offer a convenient abstraction to build and train neural networks, crafting one from scratch provides a more comprehensive understanding of the nuances involved.
