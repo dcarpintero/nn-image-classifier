@@ -299,10 +299,11 @@ Fashion-MNIST is a dataset of garment images curated by [Zalando Research](https
 
 Why this dataset? [As explained by the Zalando Research Team](https://github.com/zalandoresearch/fashion-mnist?tab=readme-ov-file#to-serious-machine-learning-researchers): *“MNIST is too easy. Convolutional nets can achieve 99.7%, and Classic ML algorithms can also achieve 97% easily […] We intend Fashion-MNIST to serve as a direct drop-in replacement for the original [MNIST dataset](http://yann.lecun.com/exdb/mnist/). It shares the same image size and structure of training and testing splits”*.
 
-<figure>
-  <img style="margin: 0 auto; display: block;" src="https://cdn-uploads.huggingface.co/production/uploads/64a13b68b14ab77f9e3eb061/iTxHeSK5Cen8QB-BBwqqS.png">
-  <figcaption style="text-align: center;">Fashion-MNIST Dataset</figcaption>
-</figure>
+<p align="center">
+  <img src="https://cdn-uploads.huggingface.co/production/uploads/64a13b68b14ab77f9e3eb061/iTxHeSK5Cen8QB-BBwqqS.png" width=500>
+</p>
+
+<p align="center">Fashion-MNIST Dataset</p>
 
 ### Data Loaders for Mini-Batches
 
@@ -436,7 +437,7 @@ Furthermore, a basic analysis of precision (accuracy of the positive predictions
 The confussion matrix confirms that the Shirt category is frequently confused with the T-Shirt/Top, Pullover, and Coat classes; whereas Coat is confused with Shirt and Pullover. This suggests that working at 28x28 pixels resolution might cast upper body garment categories as visually challenging.
 
 <p align="center">
-  <img src="https://cdn-uploads.huggingface.co/production/uploads/64a13b68b14ab77f9e3eb061/KqbEVgVv8gz5X8JkZzX4H.png" width=650>
+  <img src="https://cdn-uploads.huggingface.co/production/uploads/64a13b68b14ab77f9e3eb061/KqbEVgVv8gz5X8JkZzX4H.png" width=700>
 </p>
 
 <p align="center">Confussion Matrix</p>
@@ -466,7 +467,7 @@ transform = transforms.Compose(
 This can be easily integrated into a Gradio App, and then deployed to [HuggingFace Spaces](https://huggingface.co/spaces/dcarpintero/fashion-image-recognition):
 
 <p align="center">
-  <img src="https://cdn-uploads.huggingface.co/production/uploads/64a13b68b14ab77f9e3eb061/HwZwQbtOuuJx-VrhnV-YD.png" width=650>
+  <img src="https://cdn-uploads.huggingface.co/production/uploads/64a13b68b14ab77f9e3eb061/HwZwQbtOuuJx-VrhnV-YD.png">
 </p>
 
 <p align="center">Garment Classifier deployed to HuggingFace Spaces</p>
