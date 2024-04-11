@@ -17,31 +17,34 @@ In this article, we will implement in Python the essential modules required to b
 
 By the end of this guide, you will be able to construct the building blocks of a neural network from scratch, understand how it learns, and deploy it to [HuggingFace Spaces](https://huggingface.co/spaces/dcarpintero/fashion-image-recognitionhttps://huggingface.co/spaces/dcarpintero/fashion-image-recognition) to classify real-world garment images.
 
-<figure>
-  <img style="margin: 0 auto; display: block;" src="https://cdn-uploads.huggingface.co/production/uploads/64a13b68b14ab77f9e3eb061/bvC2A3Cb2zn81h_neojtH.png">
-  <figcaption style="text-align: center;">Garment Classifier deployed to HuggingFace Spaces</figcaption>
-</figure>
+<p align="center">
+  <img src="https://cdn-uploads.huggingface.co/production/uploads/64a13b68b14ab77f9e3eb061/bvC2A3Cb2zn81h_neojtH.png">
+</p>
+
+<p align="center">Garment Classifier deployed to HuggingFace Spaces</p>
 
 ## Table of Contents
 
-- [The Intuition behind our Neural Network](#the-intuition-behind-our-neuralnetwork)
-- [Architecture](#architecture)
-  - [Linear Transformation](#linear-transformation)
-  - [Introducing non-linearity](#introducing-non-linearity)
-  - [Regularization](#regularization)
-  - [Flatten Transformation](#flatten-transformation)
-  - [Sequential Layer](#sequential-layer)
-  - [Classifier Model](#classifier-model)
-  - [Gradient Descent Optimizer](#gradient-descent-optimizer)
-  - [Backpropagation](#backpropagation)
-- [Training](#training)
-  - [The Fashion Dataset](#the-fashion-dataset)
-  - [Data Loaders for Mini-Batches](#data-loaders-for-mini-batches)
-  - [Fitting the Model](#fitting-the-model)
-- [Model Assessment](#model-assessment)
-- [Inference](#inference)
-- [Resources](#resources)
-- [References](#references)
+- [Building a Neural Network Classifier from the Ground Up: A Step-by-Step Guide](#building-a-neural-network-classifier-from-the-ground-up-a-step-by-step-guide)
+  - [Table of Contents](#table-of-contents)
+  - [The Intuition behind our Neural Network](#the-intuition-behind-our-neuralnetwork)
+  - [Architecture](#architecture)
+    - [Linear Transformation](#linear-transformation)
+    - [Introducing non-linearity](#introducing-non-linearity)
+    - [Regularization](#regularization)
+    - [Flatten Transformation](#flatten-transformation)
+    - [Sequential Layer](#sequential-layer)
+    - [Classifier Model](#classifier-model)
+    - [Gradient Descent Optimizer](#gradient-descent-optimizer)
+    - [Backpropagation](#backpropagation)
+  - [Training](#training)
+    - [The Fashion Dataset](#the-fashion-dataset)
+    - [Data Loaders for Mini-Batches](#data-loaders-for-mini-batches)
+    - [Fitting the Model](#fitting-the-model)
+  - [Model Assessment](#model-assessment)
+  - [Inference](#inference)
+  - [Resources](#resources)
+  - [References](#references)
 
 
 
@@ -241,10 +244,12 @@ class Classifier(nn.Module):
 
 The research paper *Visualizing and Understanding Convolutional Networks* [7] offers insights into a concept akin to hierarchical progressive learning, specifically applied to convolutional layers. This provides a comparable intuition to understand how stacked layers are capable of automatically learning features within images:
 
-<figure>
-  <img style="margin: 0 auto; display: block;" src="https://cdn-uploads.huggingface.co/production/uploads/64a13b68b14ab77f9e3eb061/CMgQHSSzEaEmsBd0D2eKD.png">
-  <figcaption style="text-align: center;">Visualization of features in a convolutional neural network - https://arxiv.org/pdf/1311.2901.pdf</figcaption>
-</figure>
+<p align="center">
+  <img src="https://cdn-uploads.huggingface.co/production/uploads/64a13b68b14ab77f9e3eb061/CMgQHSSzEaEmsBd0D2eKD.png">
+</p>
+
+<p align="center">Visualization of features in a convolutional neural network - https://arxiv.org/pdf/1311.2901.pdf</p>
+
 
 ### Gradient Descent Optimizer
 
@@ -406,31 +411,35 @@ class Learner:
 
 After 25 epochs, our model achieves 0.868 accuracy, which fairly approximates [benchmark results](http://fashion-mnist.s3-website.eu-central-1.amazonaws.com/#) (0.874 for an MLP Classifier using ReLU as the activation function).
 
-<figure>
-  <img style="margin: 0 auto; display: block;" src="https://cdn-uploads.huggingface.co/production/uploads/64a13b68b14ab77f9e3eb061/BMTJGJabSWi3Jcoc_m5sH.png">
-  <figcaption style="text-align: center;">Model Assessment (epochs=25, lr=0.005, batch_size=32, SGD, CrossEntropyLoss) w/ self-implemented modules</figcaption>
-</figure>
+<p align="center">
+  <img src="https://cdn-uploads.huggingface.co/production/uploads/64a13b68b14ab77f9e3eb061/BMTJGJabSWi3Jcoc_m5sH.png" width=700>
+</p>
+
+<p align="center">Model Assessment (epochs=25, lr=0.005, batch_size=32, SGD, CrossEntropyLoss) w/ self-implemented modules</p>
 
 We observe comparable accuracy levels between our self-implemented modules and a standard PyTorch implementation with the same hyperparameters (`epochs=25, lr=0.005, batch_size=32`). Notably, the PyTorch model demonstrates a slighly smaller gap between validation and training losses, suggesting better generalization capabilities:
 
-<figure>
-  <img style="margin: 0 auto; display: block;" src="https://cdn-uploads.huggingface.co/production/uploads/64a13b68b14ab77f9e3eb061/mCLHZnCYArxC8YcSdEjYA.png">
-  <figcaption style="text-align: center;">Model Assessment (epochs=25, lr=0.005, batch_size=32, SGD, CrossEntropyLoss) w/ PyTorch modules</figcaption>
-</figure>
+<p align="center">
+  <img src="https://cdn-uploads.huggingface.co/production/uploads/64a13b68b14ab77f9e3eb061/mCLHZnCYArxC8YcSdEjYA.png" width=700>
+</p>
+
+<p align="center">Model Assessment (epochs=25, lr=0.005, batch_size=32, SGD, CrossEntropyLoss) w/ PyTorch modules</p>
 
 Furthermore, a basic analysis of precision (accuracy of the positive predictions for a specific class), recall (ability to detect all relevant instances of a specific class), and f1-score (mean of precision and recall) reveals that our model excels in categories with distinctive features such as Trouser/Jeans, Sandal, Bag, and Ankle-Boot. However, it performs below average with Shirts, Pullovers, and Coats.
 
-<figure>
-  <img style="margin: 0 auto; display: block;" src="https://cdn-uploads.huggingface.co/production/uploads/64a13b68b14ab77f9e3eb061/amnSh3QHhkgWtRKzQUpVu.png">
-  <figcaption style="text-align: center;">Precision, Recall and F1-Scores across Categories</figcaption>
-</figure>
+<p align="center">
+  <img src="https://cdn-uploads.huggingface.co/production/uploads/64a13b68b14ab77f9e3eb061/amnSh3QHhkgWtRKzQUpVu.png" width=400>
+</p>
+
+<p align="center">Precision, Recall and F1-Scores across Categories</p>
 
 The confussion matrix confirms that the Shirt category is frequently confused with the T-Shirt/Top, Pullover, and Coat classes; whereas Coat is confused with Shirt and Pullover. This suggests that working at 28x28 pixels resolution might cast upper body garment categories as visually challenging.
 
-<figure>
-  <img style="margin: 0 auto; display: block;" src="https://cdn-uploads.huggingface.co/production/uploads/64a13b68b14ab77f9e3eb061/KqbEVgVv8gz5X8JkZzX4H.png">
-  <figcaption style="text-align: center;">Confussion Matrix</figcaption>
-</figure>
+<p align="center">
+  <img src="https://cdn-uploads.huggingface.co/production/uploads/64a13b68b14ab77f9e3eb061/KqbEVgVv8gz5X8JkZzX4H.png" width=650>
+</p>
+
+<p align="center">Confussion Matrix</p>
 
 ## Inference
 
@@ -456,10 +465,11 @@ transform = transforms.Compose(
 
 This can be easily integrated into a Gradio App, and then deployed to [HuggingFace Spaces](https://huggingface.co/spaces/dcarpintero/fashion-image-recognition):
 
-<figure>
-  <img style="margin: 0 auto; display: block;" src="https://cdn-uploads.huggingface.co/production/uploads/64a13b68b14ab77f9e3eb061/HwZwQbtOuuJx-VrhnV-YD.png">
-  <figcaption style="text-align: center;">Garment Classifier deployed to HuggingFace Spaces</figcaption>
-</figure>
+<p align="center">
+  <img src="https://cdn-uploads.huggingface.co/production/uploads/64a13b68b14ab77f9e3eb061/HwZwQbtOuuJx-VrhnV-YD.png" width=650>
+</p>
+
+<p align="center">Garment Classifier deployed to HuggingFace Spaces</p>
 
 ## Resources
 
