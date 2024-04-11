@@ -22,28 +22,30 @@ By the end of this guide, you will be able to construct the building blocks of a
   <figcaption style="text-align: center;">Garment Classifier deployed to HuggingFace Spaces</figcaption>
 </figure>
 
-##  Table of Contents
+## Table of Contents
 
-* 1. [The Intuition behind our Neural Network](#TheIntuitionbehindourNeuralNetwork)
-* 2. [Architecture](#Architecture)
-	* 2.1. [Linear Transformation](#LinearTransformation)
-	* 2.2. [Introducing non-linearity](#Introducingnon-linearity)
-	* 2.3. [Regularization](#Regularization)
-	* 2.4. [Flatten Transformation](#FlattenTransformation)
-	* 2.5. [Sequential Layer](#SequentialLayer)
-	* 2.6. [Classifier Model](#ClassifierModel)
-	* 2.7. [Gradient Descent Optimizer](#GradientDescentOptimizer)
-	* 2.8. [Backpropagation](#Backpropagation)
-* 3. [Training](#Training)
-	* 3.1. [The Fashion Dataset](#TheFashionDataset)
-	* 3.2. [Data Loaders for Mini-Batches](#DataLoadersforMini-Batches)
-	* 3.3. [Fitting the Model](#FittingtheModel)
-* 4. [Model Assessment](#ModelAssessment)
-* 5. [Inference](#Inference)
-* 6. [Resources](#Resources)
-* 7. [References](#References)
+- [The Intuition behind our Neural Network](#the-intuition-behind-our-neuralnetwork)
+- [Architecture](#architecture)
+  - [Linear Transformation](#linear-transformation)
+  - [Introducing non-linearity](#introducing-non-linearity)
+  - [Regularization](#regularization)
+  - [Flatten Transformation](#flatten-transformation)
+  - [Sequential Layer](#sequential-layer)
+  - [Classifier Model](#classifier-model)
+  - [Gradient Descent Optimizer](#gradient-descent-optimizer)
+  - [Backpropagation](#backpropagation)
+- [Training](#training)
+  - [The Fashion Dataset](#the-fashion-dataset)
+  - [Data Loaders for Mini-Batches](#data-loaders-for-mini-batches)
+  - [Fitting the Model](#fitting-the-model)
+- [Model Assessment](#model-assessment)
+- [Inference](#inference)
+- [Resources](#resources)
+- [References](#references)
 
-##  1. <a name='TheIntuitionbehindourNeuralNetwork'></a>The Intuition behind our Neural Network
+
+
+## The Intuition behind our Neural Network
 
 Our goal is to classify garment images by approximating a large mathematical function to a training dataset of such images. We will begin this process by randomly initializing the parameters of our function, and adjusting them to combine input pixel values, until we obtain favorable outputs in form of class predictions. This iterative method seeks to learn features in the training dataset that differentiate between classes.
 
@@ -65,11 +67,11 @@ We will then implement a method to adjust weights automatically, applying [Stoch
 
 ***Gradients** are a measure inferred from the derivative of a function that signals how the output of the function would change by modifying its parameters. Within the context of neural networks, they represent a vector that **indicates the direction and magnitude in which we need to change each weight to improve our model**.*
 
-##  2. <a name='Architecture'></a>Architecture
+## Architecture
 
 In the following sections, we dive into the implementation details of the required components to build and train our multilayer perceptron. For simpler integration with advanced functionality such as gradient computation, these components will be defined as custom PyTorch modules.
 
-###  2.1. <a name='LinearTransformation'></a>Linear Transformation
+### Linear Transformation
 
 At the heart of our neural network are linear functions. These functions perform two key operations: (i) transformation of input values by their weights and bias parameters through matrix multiplication, and (ii) dimensionality reduction (or augmentation in some cases).
 
@@ -107,7 +109,7 @@ Note that **the weights are randomly initialized  according to a Gaussian distri
 
 Furthermore, **scaling weights is also a common practice in initialization**. This helps in controlling the variance, and can have a big impact on the training dynamics. We favour a relatively small scale value (`std=0.1`) since large values might lead to gradients increasing exponentially (and overflowing to NaN) during backpropagation, resulting in the *exploding gradients problem*.
 
-###  2.2. <a name='Introducingnon-linearity'></a>Introducing non-linearity
+### Introducing non-linearity
 
 Without non-linearity, no matter how many layers our neural network has, it would still behave like a single-layer perceptron. This is due to the fact that the composition of successive linear transformations is itself another linear transformation, which would prevent the model from approximating complex patterns.
 
@@ -126,7 +128,7 @@ class ReLU(nn.Module):
 
 The Rectified Linear Unit (ReLU) was proposed by Kunihiko Fukushima in 1969 within the context of visual feature extraction in hierarchical neural networks [3]. In 2011 [4], it was found to enable better training of deeper networks compared to the widely used activation functions *logistic sigmoid* and *hyperbolic tangent*.
 
-###  2.3. <a name='Regularization'></a>Regularization
+### Regularization
 
 Regularization is a fundamental technique used to reduce *overfitting* in neural networks, which occurs when parameters become tuned to noise on invidual data points during training. A widely used and effective method of regularization is the *dropout* function, introduced by G. Hinton's research group in 2014 [5]. Dropout works by randomly deactivating a portion of the network's units during the training phase. This encourages each unit to contribute independently, preventing the model from becoming overly reliant on over-specialized single units and enhancing its ability to generalize to new data.
 
@@ -151,7 +153,7 @@ class Dropout(nn.Module):
         return x
 ```
 
-###  2.4. <a name='FlattenTransformation'></a>Flatten Transformation
+### Flatten Transformation
 
 In deep learning, flattening images is necessary to convert multi-dimensional data into a one-dimensional (1D) array before feeding it into a classification model. Our training dataset, Fashion MNIST [6], is a collection of 60,000 grayscale images of size 28x28. We include a transformation to flatten these images in their width and height dimensions to reduce memory usage (multi-dimensional arrays take up additional memory overhead to manage their structure), and simplify the input for the model (each pixel becomes an individual unit).
 
@@ -171,7 +173,7 @@ class Flatten(nn.Module):
         return x.view(x.size(0), -1)
 ```
 
-###  2.5. <a name='SequentialLayer'></a>Sequential Layer
+### Sequential Layer
 
 To construct the full neural network architecture, we need a way to connect the individual linear operations and activation functions in a sequential manner, forming a feedforward path from the inputs to the outputs. This is achieved by using a sequential layer, which allows to define the specific order and composition of the various layers in our network.
 
@@ -192,7 +194,7 @@ class Sequential(nn.Module):
         return x
 ```
 
-###  2.6. <a name='ClassifierModel'></a>Classifier Model
+### Classifier Model
 
 After flattening the input images, we stack linear operations with non-linear functions, enabling the network to learn hierarchical representations and patterns in the data. This is essential for our image classification task, where the network needs to capture visual features to distinguish between various classes.
 
@@ -244,7 +246,7 @@ The research paper *Visualizing and Understanding Convolutional Networks* [7] of
   <figcaption style="text-align: center;">Visualization of features in a convolutional neural network - https://arxiv.org/pdf/1311.2901.pdf</figcaption>
 </figure>
 
-###  2.7. <a name='GradientDescentOptimizer'></a>Gradient Descent Optimizer
+### Gradient Descent Optimizer
 
 We implement a basic optimizer to automatically adjust the neural network’s parameters, weights and biases, based on gradients. Computed during backpropagation, gradients indicate how to update these parameters to minimize the loss function. Using these gradients, the optimizer updates the parameters in a stepwise manner, with the step size determined by the learning rate.
 
@@ -276,7 +278,7 @@ class Optimizer:
             p.grad = None
 ```
 
-###  2.8. <a name='Backpropagation'></a>Backpropagation
+### Backpropagation
 
 Introduced by [Paul Werbos](https://ieeexplore.ieee.org/author/37344537300) in 1974 [8], the concept of backpropagation for neural networks was almost entirely ignored for decades. However, it is nowadays recognized as one of the most important AI foundations.
 
@@ -284,9 +286,9 @@ At its core, backpropagation serves to calculate the gradients of the loss funct
 
 Under the hood, this method involves computing partial derivatives of a complex function, and maintaining a directed acyclic graph (DAG) that tracks the sequence of operations on the input data. To simplify this task, modern frameworks like PyTorch provide an automatic differentiation tool known as [Autograd](https://pytorch.org/tutorials/beginner/blitz/autograd_tutorial.html). In practice, as in the implementation of the *Linear transformation*, setting `requires_grad = True` is the main way to control which parts of the model are to be tracked and included in the gradient computation.
 
-##  3. <a name='Training'></a>Training
+## Training
 
-###  3.1 <a name='TheFashionDataset'></a>The Fashion Dataset
+### The Fashion Dataset
 
 Fashion-MNIST is a dataset of garment images curated by [Zalando Research](https://github.com/zalandoresearch/) — consisting of a training set of 60,000 examples and a test set of 10,000 examples. Each example is a 28x28 grayscale image, associated with a label from 10 classes (T-shirt/Top, Trouser, Pullover, Dress, Coat, Sandal, Shirt, Sneaker, Bag, and Ankle boot).
 
@@ -297,7 +299,7 @@ Why this dataset? [As explained by the Zalando Research Team](https://github.com
   <figcaption style="text-align: center;">Fashion-MNIST Dataset</figcaption>
 </figure>
 
-###  3.2 <a name='DataLoadersforMini-Batches'></a>Data Loaders for Mini-Batches
+### Data Loaders for Mini-Batches
 
 In the training process, we need to efficiently handle the loading and preprocessing of the dataset. For this purpose, we will use `torch.utils.data.DataLoader`, a utility class provided by PyTorch that helps with batching, shuffling, and loading data in parallel.
 
@@ -320,7 +322,7 @@ loaders = {'train' : DataLoader(train_data, batch_size=config.batch_size, shuffl
 
 By setting `shuffle=True` in the train loader we reshuffle this data at every epoch. This is an important consideration since there might be correlations in the raw train data arising from the way the data was collected such as alphabetically or timely ordered.
 
-###  3.3 <a name='FittingtheModel'></a>Fitting the Model
+### Fitting the Model
 
 With the neural network architecture and data loaders in place, we can now focus on the process of training the model, also known as *fitting* the model to the data. The training process can be divided into two main components: the training loop and the validation loop.
 
@@ -400,7 +402,7 @@ class Learner:
         return metrics
 ```
 
-##  4. <a name='ModelAssessment'></a>Model Assessment
+## Model Assessment
 
 After 25 epochs, our model achieves 0.868 accuracy, which fairly approximates [benchmark results](http://fashion-mnist.s3-website.eu-central-1.amazonaws.com/#) (0.874 for an MLP Classifier using ReLU as the activation function).
 
@@ -430,7 +432,7 @@ The confussion matrix confirms that the Shirt category is frequently confused wi
   <figcaption style="text-align: center;">Confussion Matrix</figcaption>
 </figure>
 
-##  5. <a name='Inference'></a>Inference
+## Inference
 
 After training the model, we can use it for inference, which involves making predictions on new data. The inference process is relatively straightforward but requires to transform real-world garment images to the format of the training dataset. To achieve this, we implement a PyTorch transformation.
 
@@ -459,13 +461,13 @@ This can be easily integrated into a Gradio App, and then deployed to [HuggingFa
   <figcaption style="text-align: center;">Garment Classifier deployed to HuggingFace Spaces</figcaption>
 </figure>
 
-##  6. <a name='Resources'></a>Resources
+## Resources
 
 - [GitHub Repo](https://github.com/dcarpintero/nn-image-classifier/)
 - [Model Card](https://huggingface.co/dcarpintero/fashion-mnist-base)
 - [HuggingFace Space](https://huggingface.co/spaces/dcarpintero/fashion-image-recognition)
 
-##  7. <a name='References'></a>References
+## References
 
 - [1] A. L. Samuel. 1959. *Some Studies in Machine Learning Using the Game of Checkers*. IBM Journal of Research and Development, Vol. 3, No. 3, pp. 210-229. [doi: 10.1147/rd.33.0210](https://ieeexplore.ieee.org/document/5392560/).
 
