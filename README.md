@@ -17,7 +17,7 @@ Classification is one of the fundamental deep learning tasks. While modern frame
 
 In this article, we will implement in Python the essential modules required to build and train a multilayer perceptron that classifies garment images. In particular, we will delve into the fundamentals of **approximation**, **non-linearity**, **regularization**, **gradients**, and **backpropagation**. Additionally, we explore the significance of **random parameter initialization** and the benefits of **training in mini-batches**.
 
-By the end of this guide, you will be able to construct the building blocks of a neural network from scratch, understand how it learns, and deploy it to [HuggingFace Spaces](https://huggingface.co/spaces/dcarpintero/fashion-image-recognitionhttps://huggingface.co/spaces/dcarpintero/fashion-image-recognition) to classify real-world garment images.
+By the end of this guide, you will be able to construct the building blocks of a neural network from scratch, understand how it learns, and deploy it to [HuggingFace Spaces](https://huggingface.co/spaces/dcarpintero/fashion-image-recognition) to classify real-world garment images.
 
 <p align="center">
   <img src="https://cdn-uploads.huggingface.co/production/uploads/64a13b68b14ab77f9e3eb061/bvC2A3Cb2zn81h_neojtH.png">
