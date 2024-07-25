@@ -6,6 +6,7 @@
 [![GitHub pull-requests](https://img.shields.io/github/issues-pr/dcarpintero/nn-image-classifier.svg)](https://GitHub.com/dcarpintero/nn-image-classifier/pulls/)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/dcarpintero/nn-image-classifier/blob/main/nb.image.classifier.ipynb)
+[![CodeFactor](https://www.codefactor.io/repository/github/dcarpintero/nn-image-classifier/badge)](https://www.codefactor.io/repository/github/dcarpintero/nn-image-classifier)
 
 [![GitHub watchers](https://img.shields.io/github/watchers/dcarpintero/nn-image-classifier.svg?style=social&label=Watch)](https://GitHub.com/dcarpintero/nn-image-classifier/watchers/)
 [![GitHub forks](https://img.shields.io/github/forks/dcarpintero/nn-image-classifier.svg?style=social&label=Fork)](https://GitHub.com/dcarpintero/nn-image-classifier/network/)
